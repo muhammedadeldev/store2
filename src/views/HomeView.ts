@@ -7,6 +7,17 @@ export async function renderHomeView(): Promise<string> {
   const settings = state.getSettings();
   const copy = (key: string, fallback: string) => state.getSiteText(key, fallback);
   const visible = (key: string) => settings.homeVisibility?.[key] !== false;
+  const cozaSlides = [
+    '/coza-template/images/slide-01.jpg',
+    '/coza-template/images/slide-02.jpg',
+    '/coza-template/images/slide-03.jpg'
+  ];
+  const cozaBanners = [
+    '/coza-template/images/banner-01.jpg',
+    '/coza-template/images/banner-02.jpg',
+    '/coza-template/images/banner-03.jpg',
+    '/coza-template/images/banner-04.jpg'
+  ];
 
   // Fetch Categories & Featured Products from Firestore
   let categories: any[] = [];
@@ -38,7 +49,7 @@ export async function renderHomeView(): Promise<string> {
       ${visible('section.hero') ? `<section class="hero-section">
         ${visible('hero.background') ? `<picture class="hero-background" aria-hidden="true">
           ${settings.heroImageMobileUrl ? `<source media="(max-width: 767px)" srcset="${settings.heroImageMobileUrl}" />` : ''}
-          <img src="${settings.heroImageUrl}" alt="" />
+          <img src="${settings.heroImageUrl || cozaSlides[0]}" alt="" />
         </picture>` : ''}
         ${visible('hero.overlay') && settings.heroOverlayActive !== false ? '<div class="hero-overlay"></div>' : ''}
         <div class="container">
@@ -93,9 +104,9 @@ export async function renderHomeView(): Promise<string> {
           </div>
 
           ${visible('collections.grid') ? `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-lg);">
-            ${categories.map(cat => `
+            ${categories.map((cat, catIndex) => `
               <a href="#shop?cat=${cat.id}" class="category-card" style="position: relative; aspect-ratio: 4/5; overflow: hidden; border-radius: var(--radius-xs); display: block; background: #222;">
-                <img src="${cat.imageUrl}" alt="${cat.name}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'" />
+                <img src="${cat.imageUrl || cozaBanners[catIndex % cozaBanners.length]}" alt="${cat.name}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'" />
                 <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);"></div>
                 <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: var(--space-lg); color: #ffffff;">
                   <h3 style="font-family: var(--font-editorial); font-size: 22px; font-weight: 500; margin-bottom: 4px;">

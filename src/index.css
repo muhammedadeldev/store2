@@ -2331,3 +2331,357 @@ html[data-theme="dark"] .nav-link:hover {
     font-size: 9px !important;
   }
 }
+
+
+/* ========================================================================
+   COZA STOREFRONT SKIN
+   Scoped to storefront chrome and pages; admin dashboard styles stay intact.
+   ======================================================================== */
+@font-face {
+  font-family: 'Coza Poppins';
+  src: url('/coza-template/fonts/Poppins/Poppins-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Coza Poppins';
+  src: url('/coza-template/fonts/Poppins/Poppins-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Coza Playfair';
+  src: url('/coza-template/fonts/PlayfairDisplay/PlayfairDisplay-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --coza-ink: #222222;
+  --coza-muted: #888888;
+  --coza-line: #eeeeee;
+  --coza-accent: #717fe0;
+}
+body {
+  font-family: 'Coza Poppins', 'Cairo', sans-serif;
+  background: #ffffff;
+  color: var(--coza-ink);
+}
+.site-header {
+  background: rgba(255, 255, 255, 0.97) !important;
+  border-bottom: 1px solid var(--coza-line) !important;
+  backdrop-filter: none !important;
+}
+.site-header .header-container {
+  max-width: 1240px;
+  height: 84px;
+  padding-inline: 28px;
+}
+.site-header .header-logo {
+  gap: 0;
+  flex: 0 0 auto;
+}
+.site-header .header-logo-img {
+  width: 133px;
+  height: auto;
+  object-fit: contain;
+}
+.site-header .header-brand-title {
+  display: none;
+}
+.site-header .header-nav {
+  gap: 4px;
+  margin-inline: auto;
+}
+.site-header .header-nav .nav-link {
+  color: var(--coza-ink);
+  font-family: 'Coza Poppins', 'Cairo', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px 15px;
+  border-radius: 0;
+  text-transform: uppercase;
+}
+.site-header .header-nav .nav-link:hover,
+.site-header .header-nav .nav-link.active {
+  color: var(--coza-accent);
+  background: transparent;
+}
+.site-header .header-actions {
+  gap: 2px;
+}
+.site-header .header-actions .icon-btn {
+  width: 38px;
+  height: 38px;
+  color: var(--coza-ink);
+  border-radius: 0;
+}
+.site-header .header-actions .icon-btn:hover {
+  color: var(--coza-accent);
+  background: transparent;
+  transform: none;
+}
+.announcement-bar {
+  background: var(--coza-ink) !important;
+  color: #ffffff;
+  min-height: 32px;
+  padding: 6px 16px;
+  font-size: 11px;
+  letter-spacing: .06em;
+}
+.home-page,
+.shop-page,
+.product-page {
+  font-family: 'Coza Poppins', 'Cairo', sans-serif;
+}
+.home-page .hero-section {
+  min-height: 620px;
+  padding: 96px 0;
+  background: #f5f5f5;
+}
+.home-page .hero-background img {
+  object-position: center 25%;
+  filter: saturate(.82);
+}
+.home-page .hero-overlay {
+  background: linear-gradient(90deg, rgba(0,0,0,.56), rgba(0,0,0,.08) 72%, transparent) !important;
+  backdrop-filter: none;
+}
+.home-page .hero-content {
+  max-width: 610px;
+}
+.home-page .hero-tagline,
+.home-page .hero-description {
+  color: #ffffff;
+}
+.home-page .hero-tagline {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  letter-spacing: .18em;
+}
+.home-page .hero-title,
+.home-page h3,
+.shop-page h1,
+.product-page h1,
+.product-page h3 {
+  font-family: 'Coza Playfair', 'Cairo', serif !important;
+  letter-spacing: -.02em;
+}
+.home-page .hero-title {
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 1.08;
+  font-weight: 400;
+}
+.home-page .hero-actions .btn,
+.home-page .btn,
+.shop-page .btn,
+.product-page .btn {
+  border-radius: 0;
+  box-shadow: none !important;
+  font-family: 'Coza Poppins', 'Cairo', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: 12px;
+}
+.home-page .hero-btn-primary {
+  background: var(--coza-accent) !important;
+  border-color: var(--coza-accent) !important;
+  color: #ffffff !important;
+}
+.home-page .hero-btn-secondary {
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+  color: var(--coza-ink) !important;
+}
+.home-page .pillars-section {
+  background: #ffffff;
+  border-bottom: 1px solid var(--coza-line);
+}
+.home-page .pillars-grid {
+  gap: 0;
+}
+.home-page .pillars-grid > div {
+  min-height: 100px;
+  padding: 20px 26px;
+  border-inline-end: 1px solid var(--coza-line);
+}
+.home-page .pillars-grid > div:last-child {
+  border-inline-end: 0;
+}
+.home-page .category-card {
+  border-radius: 0 !important;
+}
+.home-page .category-card h3 {
+  color: #ffffff;
+}
+.home-page .product-card,
+.shop-page .product-card,
+.product-page .product-card {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: #ffffff;
+  box-shadow: none;
+}
+.home-page .product-card:hover,
+.shop-page .product-card:hover,
+.product-page .product-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+.home-page .product-image-wrap,
+.shop-page .product-image-wrap,
+.product-page .product-image-wrap {
+  border-radius: 0;
+  background: #f5f5f5;
+}
+.home-page .product-card .product-image,
+.shop-page .product-card .product-image,
+.product-page .product-card .product-image {
+  transition: transform .5s ease;
+}
+.home-page .product-card:hover .product-image,
+.shop-page .product-card:hover .product-image,
+.product-page .product-card:hover .product-image {
+  transform: scale(1.045);
+}
+.home-page .product-info,
+.shop-page .product-info,
+.product-page .product-info {
+  padding: 16px 0 6px;
+  gap: 5px;
+}
+.home-page .product-category,
+.shop-page .product-category,
+.product-page .product-category {
+  color: var(--coza-muted);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: .08em;
+}
+.home-page .product-title,
+.shop-page .product-title,
+.product-page .product-title {
+  color: var(--coza-ink);
+  font-size: 13px;
+  font-weight: 400;
+}
+.home-page .price-current,
+.shop-page .price-current,
+.product-page .price-current {
+  color: var(--coza-ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+.home-page .product-badge,
+.shop-page .product-badge,
+.product-page .product-badge {
+  top: 12px;
+  left: 12px;
+  border-radius: 0;
+  background: var(--coza-accent);
+  box-shadow: none;
+  font-size: 10px;
+  font-weight: 400;
+}
+[dir="rtl"] .home-page .product-badge,
+[dir="rtl"] .shop-page .product-badge,
+[dir="rtl"] .product-page .product-badge {
+  left: auto;
+  right: 12px;
+}
+.shop-page {
+  max-width: 1240px;
+  padding-top: 62px !important;
+}
+.shop-page > div:first-child {
+  border-bottom-color: var(--coza-line) !important;
+}
+.shop-page .shop-grid-layout {
+  gap: 44px;
+}
+.shop-page .shop-filters-sidebar {
+  border-inline-end: 1px solid var(--coza-line);
+  padding-inline-end: 28px;
+}
+.shop-page .mobile-chip {
+  border-radius: 0;
+  border-color: var(--coza-line);
+  color: var(--coza-muted);
+}
+.shop-page .mobile-chip.active {
+  background: var(--coza-ink);
+  border-color: var(--coza-ink);
+}
+.product-page {
+  max-width: 1240px;
+}
+.product-page .zoom-container {
+  border-radius: 0 !important;
+  border-color: var(--coza-line) !important;
+  background: #f5f5f5 !important;
+}
+.product-page .recommendation-heading h3,
+.product-page h3 {
+  font-weight: 400;
+}
+.site-footer {
+  background: #111111 !important;
+  border-top: 0 !important;
+  font-family: 'Coza Poppins', 'Cairo', sans-serif;
+}
+.site-footer h3,
+.site-footer h4 {
+  font-family: 'Coza Poppins', 'Cairo', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: .06em !important;
+}
+@media (max-width: 992px) {
+  .site-header .header-container {
+    height: 70px;
+    padding-inline: 16px;
+  }
+  .site-header .header-logo-img {
+    width: 112px;
+  }
+  .home-page .hero-section {
+    min-height: 520px;
+    padding: 72px 0;
+  }
+  .home-page .pillars-grid > div {
+    border-inline-end: 0;
+    border-bottom: 1px solid var(--coza-line);
+  }
+}
+@media (max-width: 600px) {
+  .site-header .header-container {
+    gap: 6px;
+  }
+  .site-header .header-actions .icon-btn {
+    width: 34px;
+    height: 34px;
+  }
+  .home-page .hero-section {
+    min-height: 520px;
+    padding: 64px 0;
+  }
+  .home-page .hero-overlay {
+    background: linear-gradient(90deg, rgba(0,0,0,.64), rgba(0,0,0,.16)) !important;
+  }
+  .home-page .hero-title {
+    font-size: 43px;
+  }
+  .shop-page {
+    padding-top: 32px !important;
+  }
+  .shop-page .shop-filters-sidebar {
+    border-inline-end: 0;
+    padding-inline-end: 0;
+  }
+  .product-page .product-recommendations {
+    margin-top: 52px;
+  }
+}

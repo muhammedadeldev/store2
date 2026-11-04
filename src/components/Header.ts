@@ -28,7 +28,7 @@ export function renderHeader(): string {
 
         <!-- Brand Logo -->
         <a href="#home" class="header-logo" style="text-decoration: none;">
-          <img src="${settings.headerLogoUrl || '/assets/logo-icon.png'}" alt="${brandName}" class="header-logo-img" />
+          <img src="${settings.headerLogoUrl || '/coza-template/coza-logo.png'}" alt="${brandName}" class="header-logo-img" />
           <span class="header-brand-title">${brandName}</span>
         </a>
 
@@ -82,7 +82,7 @@ export function renderHeader(): string {
     <aside id="mobile-nav-drawer" class="mobile-nav-drawer" aria-label="Mobile Navigation">
       <div class="mobile-nav-header">
         <div style="display: flex; align-items: center; gap: 10px;">
-          <img src="${settings.headerLogoUrl || '/assets/logo-icon.png'}" alt="${brandName}" style="height: 30px; width: auto;" />
+          <img src="${settings.headerLogoUrl || '/coza-template/coza-logo.png'}" alt="${brandName}" style="height: 30px; width: auto;" />
           <div>
             <div style="font-weight: 800; font-size: 16px; color: var(--color-text-main); letter-spacing: 0.05em;">${brandName}</div>
             <div style="font-size: 11px; color: var(--color-text-muted); font-weight: 600;">${copy(`header.tagline.${lang}`, lang === 'ar' ? 'ستريت وير مصري معاصر' : 'Contemporary Egyptian streetwear')}</div>

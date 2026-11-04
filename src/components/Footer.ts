@@ -8,7 +8,7 @@ export function renderFooter(): string {
   const tagline = lang === 'ar' ? settings.taglineAr || settings.tagline : settings.tagline;
 
   return `
-    <footer style="background-color: #121212; color: #a3a19d; padding-top: var(--space-4xl); padding-bottom: var(--space-2xl); border-top: 1px solid #292826;">
+    <footer class="site-footer" style="background-color: #121212; color: #a3a19d; padding-top: var(--space-4xl); padding-bottom: var(--space-2xl); border-top: 1px solid #292826;">
       <div class="container">
         <div class="footer-grid">
           
