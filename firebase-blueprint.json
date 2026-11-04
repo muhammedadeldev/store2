@@ -1,0 +1,349 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Customer profile and preferences",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "phoneNumber": { "type": "string", "maxLength": 30 },
+        "role": { "type": "string", "enum": ["customer", "admin", "manager"] },
+        "defaultAddress": { "type": "object" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["email"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "System administrator user record for RBAC",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "enum": ["super_admin", "store_manager", "products_manager", "orders_manager", "inventory_manager", "content_manager", "customer_support"] },
+        "permissions": { "type": "array" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["email", "role"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Fashion clothing product with variants, SKUs, colors and sizes",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 200 },
+        "nameAr": { "type": "string", "maxLength": 200 },
+        "slug": { "type": "string", "maxLength": 200 },
+        "sku": { "type": "string", "maxLength": 50 },
+        "description": { "type": "string", "maxLength": 5000 },
+        "descriptionAr": { "type": "string", "maxLength": 5000 },
+        "categoryId": { "type": "string" },
+        "categoryName": { "type": "string" },
+        "price": { "type": "number" },
+        "salePrice": { "type": "number" },
+        "cost": { "type": "number" },
+        "images": { "type": "array" },
+        "colors": { "type": "array" },
+        "sizes": { "type": "array" },
+        "variants": { "type": "array" },
+        "fabric": { "type": "string", "maxLength": 200 },
+        "careInstructions": { "type": "string", "maxLength": 1000 },
+        "isPublished": { "type": "boolean" },
+        "isFeatured": { "type": "boolean" },
+        "isNewArrival": { "type": "boolean" },
+        "isBestSeller": { "type": "boolean" },
+        "totalStock": { "type": "number" },
+        "seoTitle": { "type": "string", "maxLength": 200 },
+        "seoDescription": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["name", "slug", "price", "categoryId"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Fashion category like Men, Women, Outerwear, Dresses",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 100 },
+        "nameAr": { "type": "string", "maxLength": 100 },
+        "slug": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "imageUrl": { "type": "string", "maxLength": 1000 },
+        "sortOrder": { "type": "number" },
+        "isActive": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["name", "slug"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer purchase order with lifecycle tracking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderNumber": { "type": "string", "maxLength": 50 },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string", "maxLength": 100 },
+        "customerEmail": { "type": "string", "maxLength": 100 },
+        "customerPhone": { "type": "string", "maxLength": 30 },
+        "shippingAddress": { "type": "object" },
+        "items": { "type": "array" },
+        "subtotal": { "type": "number" },
+        "shippingCost": { "type": "number" },
+        "discountAmount": { "type": "number" },
+        "couponCode": { "type": "string" },
+        "taxAmount": { "type": "number" },
+        "total": { "type": "number" },
+        "currency": { "type": "string" },
+        "paymentMethod": { "type": "string", "enum": ["cod", "card", "wallet"] },
+        "paymentStatus": { "type": "string", "enum": ["pending", "paid", "refunded"] },
+        "status": { "type": "string", "enum": ["new", "confirmed", "processing", "packed", "shipped", "delivered", "cancelled", "returned", "partially_returned"] },
+        "notes": { "type": "string", "maxLength": 1000 },
+        "statusHistory": { "type": "array" },
+        "trackingNumber": { "type": "string", "maxLength": 100 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["customerName", "customerPhone", "items", "total", "status"]
+    },
+    "InventoryMovement": {
+      "title": "InventoryMovement",
+      "description": "Audit trail log of all stock adjustments and purchases",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "productId": { "type": "string" },
+        "sku": { "type": "string" },
+        "variantId": { "type": "string" },
+        "quantityDelta": { "type": "number" },
+        "previousStock": { "type": "number" },
+        "newStock": { "type": "number" },
+        "type": { "type": "string", "enum": ["sale", "cancellation_restock", "return_restock", "manual_adjustment", "purchase_inbound", "damage_writeoff"] },
+        "referenceId": { "type": "string" },
+        "reason": { "type": "string", "maxLength": 500 },
+        "performedBy": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["productId", "sku", "quantityDelta", "type"]
+    },
+    "ReturnRequest": {
+      "title": "ReturnRequest",
+      "description": "Customer return or exchange request",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderId": { "type": "string" },
+        "orderNumber": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerEmail": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "type": { "type": "string", "enum": ["return", "exchange"] },
+        "items": { "type": "array" },
+        "reason": { "type": "string", "maxLength": 500 },
+        "detailedReason": { "type": "string", "maxLength": 2000 },
+        "status": { "type": "string", "enum": ["requested", "approved", "received", "inspected", "refunded", "rejected", "completed"] },
+        "adminNotes": { "type": "string", "maxLength": 1000 },
+        "refundAmount": { "type": "number" },
+        "restocked": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["orderId", "type", "reason", "status"]
+    },
+    "Coupon": {
+      "title": "Coupon",
+      "description": "Discount coupon code rules",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string", "maxLength": 50 },
+        "discountType": { "type": "string", "enum": ["percentage", "fixed"] },
+        "discountValue": { "type": "number" },
+        "minOrderValue": { "type": "number" },
+        "maxDiscount": { "type": "number" },
+        "usageLimit": { "type": "number" },
+        "usageCount": { "type": "number" },
+        "startDate": { "type": "string" },
+        "endDate": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["code", "discountType", "discountValue", "isActive"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Customer product reviews and ratings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "productId": { "type": "string" },
+        "customerName": { "type": "string", "maxLength": 100 },
+        "customerEmail": { "type": "string", "maxLength": 100 },
+        "rating": { "type": "number" },
+        "title": { "type": "string", "maxLength": 200 },
+        "comment": { "type": "string", "maxLength": 2000 },
+        "isApproved": { "type": "boolean" },
+        "isVerifiedPurchase": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["productId", "rating", "customerName", "comment"]
+    },
+    "Banner": {
+      "title": "Banner",
+      "description": "Homepage and promotional editorial banners",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string", "maxLength": 200 },
+        "titleAr": { "type": "string", "maxLength": 200 },
+        "subtitle": { "type": "string", "maxLength": 300 },
+        "subtitleAr": { "type": "string", "maxLength": 300 },
+        "imageUrl": { "type": "string", "maxLength": 1000 },
+        "mobileImageUrl": { "type": "string", "maxLength": 1000 },
+        "linkUrl": { "type": "string", "maxLength": 500 },
+        "buttonText": { "type": "string", "maxLength": 50 },
+        "buttonTextAr": { "type": "string", "maxLength": 50 },
+        "position": { "type": "string", "enum": ["hero", "middle", "popup", "bottom"] },
+        "sortOrder": { "type": "number" },
+        "isActive": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "imageUrl", "isActive"]
+    },
+    "Page": {
+      "title": "Page",
+      "description": "CMS custom content page",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string", "maxLength": 200 },
+        "titleAr": { "type": "string", "maxLength": 200 },
+        "slug": { "type": "string", "maxLength": 200 },
+        "content": { "type": "string" },
+        "contentAr": { "type": "string" },
+        "isPublished": { "type": "boolean" },
+        "seoTitle": { "type": "string", "maxLength": 200 },
+        "seoDescription": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["title", "slug", "isPublished"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Store configuration and brand details",
+      "type": "object",
+      "properties": {
+        "brandName": { "type": "string", "maxLength": 100 },
+        "brandNameAr": { "type": "string", "maxLength": 100 },
+        "logoUrl": { "type": "string", "maxLength": 1000 },
+        "tagline": { "type": "string", "maxLength": 300 },
+        "taglineAr": { "type": "string", "maxLength": 300 },
+        "currency": { "type": "string", "maxLength": 10 },
+        "currencyAr": { "type": "string", "maxLength": 10 },
+        "whatsappNumber": { "type": "string", "maxLength": 30 },
+        "contactEmail": { "type": "string", "maxLength": 100 },
+        "contactPhone": { "type": "string", "maxLength": 30 },
+        "address": { "type": "string", "maxLength": 300 },
+        "announcementBarText": { "type": "string", "maxLength": 300 },
+        "announcementBarTextAr": { "type": "string", "maxLength": 300 },
+        "announcementBarActive": { "type": "boolean" },
+        "announcementBarBgColor": { "type": "string", "maxLength": 30 },
+        "taxPercentage": { "type": "number" },
+        "enableTax": { "type": "boolean" },
+        "freeShippingThreshold": { "type": "number" },
+        "defaultShippingCost": { "type": "number" },
+        "heroTitle": { "type": "string", "maxLength": 200 },
+        "heroTitleAr": { "type": "string", "maxLength": 200 },
+        "heroSubtitle": { "type": "string", "maxLength": 400 },
+        "heroSubtitleAr": { "type": "string", "maxLength": 400 },
+        "heroImageUrl": { "type": "string", "maxLength": 1000 },
+        "heroCtaText": { "type": "string", "maxLength": 50 },
+        "heroCtaTextAr": { "type": "string", "maxLength": 50 },
+        "heroCtaLink": { "type": "string", "maxLength": 200 },
+        "socialInstagram": { "type": "string", "maxLength": 200 },
+        "socialFacebook": { "type": "string", "maxLength": 200 },
+        "socialTiktok": { "type": "string", "maxLength": 200 },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "ShippingZone": {
+      "title": "ShippingZone",
+      "description": "Governorates and delivery rates",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 100 },
+        "nameAr": { "type": "string", "maxLength": 100 },
+        "cost": { "type": "number" },
+        "estimatedDays": { "type": "string", "maxLength": 50 },
+        "estimatedDaysAr": { "type": "string", "maxLength": 50 },
+        "isActive": { "type": "boolean" }
+      },
+      "required": ["name", "cost", "isActive"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Customer profile document accessible by the user and admins"
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/Admin" },
+      "description": "Administrator accounts and RBAC permissions"
+    },
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Public clothing catalog items with variants and pricing"
+    },
+    "/categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/Category" },
+      "description": "Product categories"
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Customer purchase orders"
+    },
+    "/inventoryMovements/{movementId}": {
+      "schema": { "$ref": "#/entities/InventoryMovement" },
+      "description": "Inventory movement audit log"
+    },
+    "/returns/{returnId}": {
+      "schema": { "$ref": "#/entities/ReturnRequest" },
+      "description": "Customer return and exchange requests"
+    },
+    "/coupons/{couponId}": {
+      "schema": { "$ref": "#/entities/Coupon" },
+      "description": "Discount coupon codes"
+    },
+    "/reviews/{reviewId}": {
+      "schema": { "$ref": "#/entities/Review" },
+      "description": "Customer reviews on products"
+    },
+    "/banners/{bannerId}": {
+      "schema": { "$ref": "#/entities/Banner" },
+      "description": "Promotional banners"
+    },
+    "/pages/{pageId}": {
+      "schema": { "$ref": "#/entities/Page" },
+      "description": "Custom CMS pages"
+    },
+    "/settings/{settingsId}": {
+      "schema": { "$ref": "#/entities/Settings" },
+      "description": "Global store settings"
+    },
+    "/shippingZones/{zoneId}": {
+      "schema": { "$ref": "#/entities/ShippingZone" },
+      "description": "Shipping regions and rates"
+    }
+  }
+}

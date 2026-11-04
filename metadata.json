@@ -1,0 +1,6 @@
+{
+  "name": "L'ÉTOILE Haute Couture & Fashion",
+  "description": "منصة تجارة إلكترونية راقية ومتكاملة لبراند أزياء - متجر إلكتروني للعملاء مع لوحة تحكم إدارية شاملة للمنتجات والمخزون والطلبات والمرتجعات وإدارة المحتوى",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+    <!-- Browser extension & executor fetch compatibility shim -->
+    <script>
+      (function() {
+        try {
+          var origFetch = window.fetch;
+          var _customFetch = origFetch ? origFetch.bind(window) : undefined;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return _customFetch;
+            },
+            set: function(newFetch) {
+              _customFetch = newFetch;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (_) {}
+
+        // Prevent external browser extension errors from breaking application execution
+        window.addEventListener('error', function(event) {
+          if (
+            (event.filename && event.filename.indexOf('chrome-extension://') !== -1) ||
+            (event.error && event.error.stack && event.error.stack.indexOf('chrome-extension://') !== -1)
+          ) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return true;
+          }
+        }, true);
+
+        window.addEventListener('unhandledrejection', function(event) {
+          if (
+            event.reason &&
+            event.reason.stack &&
+            event.reason.stack.indexOf('chrome-extension://') !== -1
+          ) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+          }
+        }, true);
+      })();
+    </script>
+    <title>EIGHTY-EIGHT | براند الأزياء والستريت وير المصري المعاصر</title>
+    <meta name="description" content="منصة متجر EIGHTY-EIGHT للأزياء والملابس العصرية الراقية - خامات قطن مصري 100%، شحن سريع لجميع المحافظات ودفع عند الاستلام." />
+    <meta property="og:title" content="EIGHTY-EIGHT Fashion" />
+    <meta property="og:description" content="براند أزياء مصري عصري بخامات قطنية وفخامة استثنائية - EIGHTY-EIGHT" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts: Cairo for modern Arabic elegance & luxury fashion -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="/src/index.css" />
+  </head>
+  <body class="bg-primary text-primary antialiased selection:bg-accent selection:text-white">
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
